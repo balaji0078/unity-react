@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from './Utils/Common';
+import jwt from 'jwt-decode'
 
 function Login(props) {
   const [loading, setLoading] = useState(false);
@@ -14,11 +15,15 @@ function Login(props) {
 
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+   // localStorage.clear()
+    // Update the document title using the browser API
+  });
   // handle button click of login form
   const handleLogin = () => {
     // setError(null);
     setLoading(true);
-    axios.post('http://localhost:3000/login', { mobile: username.value}).then(response => {
+    axios.post('http://54.194.76.216:5000/login', { mobile: username.value}).then(response => {
       setLoading(false);
       setVerifyOtp(true);
 
@@ -32,7 +37,15 @@ function Login(props) {
   }
   const handleOtp = () =>{
     setLoading(true);
-    axios.post('http://localhost:3000/verifyToken', { mobile: username.value,otp:otpVal.value}).then(response => {
+    axios.post('http://54.194.76.216:5000/verifyToken', { mobile: username.value,otp:otpVal.value}).then(res => {
+      const token = res.data.token;
+      localStorage.clear();
+      const user = jwt(token); // decode your token here
+      const id = user.id
+      const name = user.name
+      localStorage.setItem('token', token);
+      localStorage.setItem('uid', id);
+      localStorage.setItem('name', name);
       setLoading(false);
       // setUserSession(response.data.token, response.data.user);
       props.history.push('/user');

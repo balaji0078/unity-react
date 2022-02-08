@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Login from './Login';
 import Dashboard from './Dashboard';
-import Home from './Home';
+import Tree from './Home';
 import Create from './CreateUser'
 
 import PrivateRoute from './Utils/PrivateRoute';
@@ -15,18 +15,18 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const token = getToken();
-    if (!token) {
-      return;
-    }
+    // const token = getToken();
+    // if (!token) {
+    //   return;
+    // }
 
-    axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
-      setUserSession(response.data.token, response.data.user);
-      setAuthLoading(false);
-    }).catch(error => {
-      removeUserSession();
-      setAuthLoading(false);
-    });
+    // axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
+    //   setUserSession(response.data.token, response.data.user);
+    //   setAuthLoading(false);
+    // }).catch(error => {
+    //   removeUserSession();
+    //   setAuthLoading(false);
+    // });
   }, []);
 
   if (authLoading && getToken()) {
@@ -38,15 +38,23 @@ function App() {
       <BrowserRouter>
         <div>
           <div className="header">
-            {/* <NavLink exact activeClassName="active" to="/">Home</NavLink>
-            <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
-            <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small> */}
+            <NavLink activeClassName="active" to="/user">User</NavLink>
+            <NavLink activeClassName="active" to="/Create">SignIn</NavLink>
+            <NavLink activeClassName="active" to="/">Login</NavLink>
+            <a style={{marginLeft:0}} href='https://policywrite.s3.ap-south-1.amazonaws.com/Doc1.docx'>
+            <label className='ml-2' >Privacy-policy</label>
+            </a>
+      
+            {/* <NavLink activeClassName="active" to="https://policywrite.s3.ap-south-1.amazonaws.com/Doc1.docx">Login</NavLink> */}
+
+
+
           </div>
           <div className="content">
             <Switch>
               <Route exact path="/" component={Login} />
-              {/* <Route exact path="/create" component={Create} /> */}
-              <Route exact path="/user" component={Create} />
+              <Route exact path="/create" component={Create} />
+              <Route exact path="/user" component={Tree} />
 
               {/* <PublicRoute path="/login" component={Login} /> */}
               {/* <PrivateRoute path="/dashboard" component={Dashboard} /> */}

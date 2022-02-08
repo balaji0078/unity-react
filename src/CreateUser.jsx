@@ -3,12 +3,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React,{useState} from 'react'
 import { Dropdown,Message, toaster,Loader,Paragraph } from 'rsuite';
-import { Select,Box,Textarea } from 'theme-ui'
+import { Select,Box,Textarea,Spinner } from 'theme-ui'
 import axios from 'axios';
 import 'rsuite/dist/rsuite.min.css'
 
 
-export default function Form() {
+export default function Form(props) {
 
 // States for registration
 const [name, setName] = useState('');
@@ -16,6 +16,8 @@ const [email, setEmail] = useState('');
 const [refferal, setReferral] = useState('');
 const [dropDownType, setDropDownType] = useState(1);
 const [address, setAddress] = useState('');
+const [enableSpinner, setSpinner] = useState(false);
+
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
@@ -29,8 +31,6 @@ const handleName = (e) => {
 
 const handleAddress =(e)=>{
   setAddress(e.target.value)
-  console.log(e.target.value)
-
 }
 const HandleLoader = () =>{
   return (
@@ -52,40 +52,23 @@ const handleRefferal = (e) => {
 };
 
 // Handling the form submission
-const handleSubmit = (e) => {
+const handleSubmit = async(e) => {
 	e.preventDefault();
-	if (name === '' || email === '' || address === '') {
+	if (name === '' || email === '') {
 	setError(true);
 	} 
   else
    {
     
-    setError(false);
-   
-      let body ={
-        name:name,
-        mobile:email,
-        address:address,
-        referrer:refferal,
-        areaId:1,
-        type:dropDownType
-      }
+    setError(false); 
+	await displayRazorpay();
+	//   console.log(verifyPay,"vpayyyy")
 
-      axios.post('http://54.194.76.216:5000//create', body).then(response => {
-        console.log(response.status==200)
-        props.history.push('/login');
+	//   if(verifyPay=='success'){
 
+	// 	}
 
-        // setUserSession(response.data.token, response.data.user);
-    //   props.history.push('/dashboard');
-      }).catch(error => {
-
-        return(<>
-          <Message type="success" /></>
-        )
-        // if (error.response.status === 401) setError(error.response.data.message);
-      setError("Something went wrong. Please try again later.");
-      });
+     
 
 	}
 };
@@ -121,7 +104,91 @@ const errorMessage = () => {
 	);
 };
 
+function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement('script')
+      script.src = src
+      script.onload = () => {
+        resolve(true)
+      }
+      script.onerror = () => {
+        resolve(false)
+      }
+      document.body.appendChild(script)
+    })
+  }
+
+  async function displayRazorpay() {
+		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+    console.log(res,"ressss")
+
+		if (!res) {
+			alert('Razorpay SDK failed to load. Are you online?')
+			return
+		}
+
+		const data = await fetch('http://54.194.76.216:5000/razorpay', { method: 'POST' }).then((t) =>
+			t.json()
+		)
+
+		console.log(data)
+
+		const options = {
+			key: 'rzp_test_td5Af2X9GYXNnl',
+			currency: data.currency,
+			amount: data.amount.toString(),
+			order_id: data.id,
+			name: 'Donation',
+			description: 'Thank you for nothing. Please give us some money',
+			// image: 'http://localhost:1337/logo.svg',
+			handler: function (response) {
+				setSpinner(true)
+				let body ={
+					name:name,
+					mobile:email,
+					address:address,
+					referrer:refferal,
+					areaId:1,
+					type:dropDownType
+				  }
+			     if(response){
+					axios.post('http://54.194.76.216:5000/create', body).then(response => {
+						setSpinner(false)
+						console.log(response.status==200)
+						alert("user created succesfully !!!!!!")
+						props.history.push('/');
+					  }).catch(error => {
+				
+						alert("user not created please contact admin!!!!!!")
+						props.location.reload();
+					});
+
+				 }
+
+				// alert(response.razorpay_payment_id)
+				// alert(response.razorpay_order_id)
+				// alert(response.razorpay_signature)
+				return 'success'
+				
+			},
+			prefill: {
+        name,
+				email: 'bala12@mailnesia.com',
+				phone_number: '7904306518'
+			}
+		}
+		const paymentObject = new window.Razorpay(options)
+		paymentObject.open()
+	}
+
+
+  
+
+
 return ( 
+<div>
+{enableSpinner && <Loader center content="loading" />}
 
 <div className="form">
 	<div>
@@ -160,7 +227,7 @@ return (
     </div>
     <div className='row col-2'>
     <label className="label" style={{paddingLeft:'12px'}}>Address</label>
-      <Textarea defaultValue="" style={{marginLeft:10}} rows={4} onClick={(e)=>handleAddress(e)}>
+     <Textarea defaultValue="" style={{marginLeft:10}} rows={4} onChange={(e)=>handleAddress(e)}>
       </Textarea>
     </div>
     <div className='row col-2 pt-4'>
@@ -169,6 +236,7 @@ return (
 		</button>
     </div>
 	</form>
+	</div>
 	</div>
 );
 }
