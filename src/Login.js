@@ -37,9 +37,9 @@ function Login(props) {
   }
   const handleOtp = () =>{
     setLoading(true);
-    axios.post('http://54.194.76.216:5000/verifyToken', { mobile: username.value,otp:otpVal.value}).then(res => {
-      const token = res.data.token;
-      localStorage.clear();
+    axios.post('http://54.194.76.216:5000/verifyOTP', { mobile: username.value,otp:otpVal.value}).then(res => {
+      
+      const token = res.data.data.token;
       const user = jwt(token); // decode your token here
       const id = user.id
       const name = user.name
@@ -48,7 +48,7 @@ function Login(props) {
       localStorage.setItem('name', name);
       setLoading(false);
       // setUserSession(response.data.token, response.data.user);
-      props.history.push('/user');
+      props.history.push('/stores');
     }).catch(error => {
       setLoading(false);
       // if (error.response.status === 401) setError(error.response.data.message);
