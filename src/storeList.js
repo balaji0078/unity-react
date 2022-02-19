@@ -24,7 +24,7 @@ const getShops = () =>{
 
     }
     if(token!=null){
-    axios.post('http://54.194.76.216:5000/getShopList',{},{headers:headers}).then(response => {
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/getShopList',{},{headers:headers}).then(response => {
     setData(response.data.data)
 
 }).catch(error => {
