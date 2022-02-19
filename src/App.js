@@ -390,6 +390,30 @@ function App() {
 )
 }
 
+const contactUS = () =>{
+  return (
+    <>
+    <center>
+      <h1 className='bg-center'>
+    Contact us
+    </h1>
+    </center>
+    <p>
+      Digital Unity</p>
+    <p>
+    Address - Old No.1/22, New No.1/344 Sambalal St.,
+    <br/>
+    Navalur, CH-600130
+    <br/>
+    Call us: Ph No - 9884588854
+    <br/>
+    Email us: Mail ID - digitalunityecom@gmail.com
+    <br/>
+    </p>
+    </>
+  )
+}
+
   const terms = () =>{
     var myWindow = window.open("", "myWindow", "width=200,height=100");   // Opens a new window
     myWindow.document.write(htmlData);   // Text in the new window
@@ -403,10 +427,13 @@ function App() {
           <div className="header">
             <NavLink activeClassName="active" to="/user">User</NavLink>
             <NavLink activeClassName="active" to="/Create">SignIn</NavLink>
-           <NavLink activeClassName="active" to="/">Login</NavLink>
+           <NavLink activeClassName="active" to="/login">Login</NavLink>
            <NavLink activeClassName="active" to="/stores">Stores</NavLink>
             <a style={{marginLeft:17}} href='/terms' >
             <label className='ml-2' >Terms and Privacy Policy</label>
+            </a>
+            <a style={{marginLeft:17}} href='/contact' >
+            <label className='ml-2' >Contact Us</label>
             </a>
 
             {/* <NavLink activeClassName="active" to="https://policywrite.s3.ap-south-1.amazonaws.com/Doc1.docx">Login</NavLink> */}
@@ -416,13 +443,14 @@ function App() {
           </div>
           <div className="content">
             <Switch>
-              {/* <Route exact path="/" component={Introduction} /> 
-              <Route exact path="/login" component={Login} /> */}
-              <Route exact path="/" component={Login} />
+              <Route exact path="/" component={Model} /> 
+              <Route exact path="/login" component={Login} />
               <Route exact path="/create" component={Create} />
               <Route exact path="/user" component={Tree} />
               <Route exact path="/stores" component={Stores} />
               <Route exact path="/terms" component={htmlData} />
+              <Route exact path="/contact" component={contactUS} />
+
 
 
               {/* <PublicRoute path="/login" component={Login} /> */}

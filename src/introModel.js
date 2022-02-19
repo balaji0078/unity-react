@@ -2,11 +2,15 @@ import { Modal,ButtonToolbar,Paragraph,Loader,Button,Placeholder } from 'rsuite'
 import React,{useEffect}  from 'react';
 import Introduction from './introduction'
 
-const App = () => {
+const App = (props) => {
     const [open, setOpen] = React.useState(false);
     const [rows, setRows] = React.useState(0);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => 
+    {
+      props.history.push('/login')  
+      setOpen(false);
+    }
     const { Paragraph } = Placeholder;
 
 
@@ -33,13 +37,15 @@ const App = () => {
         //   }}
         >
           <Modal.Header>
-            <Modal.Title>Introduction</Modal.Title>
+            <Modal.Title>Digital Unity</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {rows ? (
-              <Paragraph>
+            <>
               <Introduction/>
-              </Paragraph>
+              <Paragraph />
+            </>  
+            
               
             ) : (
               <div style={{ textAlign: 'center' }}>
