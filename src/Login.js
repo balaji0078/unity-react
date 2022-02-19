@@ -23,7 +23,7 @@ function Login(props) {
   const handleLogin = () => {
     // setError(null);
     setLoading(true);
-    axios.post('http://54.194.76.216:5000/login', { mobile: username.value}).then(response => {
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/login', { mobile: username.value}).then(response => {
       setLoading(false);
       setVerifyOtp(true);
 
@@ -37,7 +37,7 @@ function Login(props) {
   }
   const handleOtp = () =>{
     setLoading(true);
-    axios.post('http://54.194.76.216:5000/verifyOTP', { mobile: username.value,otp:otpVal.value}).then(res => {
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/verifyOTP', { mobile: username.value,otp:otpVal.value}).then(res => {
       
       const token = res.data.data.token;
       const user = jwt(token); // decode your token here
@@ -81,7 +81,7 @@ function Login(props) {
 			return
 		}
 
-		const data = await fetch('http://54.194.76.216:5000/razorpay', { method: 'POST' }).then((t) =>
+		const data = await fetch('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/razorpay', { method: 'POST' }).then((t) =>
 			t.json()
 		)
 
