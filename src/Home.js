@@ -118,7 +118,7 @@ const dataWithCollapsedProperties = [
   }
 ]
 
-const Vertical = 'vertical'
+const Vertical = 'horizontal'
 class MyUserComponent extends React.Component {
 
 
