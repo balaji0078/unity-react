@@ -7,7 +7,8 @@ import Dashboard from './Dashboard';
 import Tree from './Home';
 import Create from './CreateUser'
 import Stores from './storeList';
-
+import Introduction from './introduction'
+import Model from './introModel'
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
@@ -415,11 +416,14 @@ function App() {
           </div>
           <div className="content">
             <Switch>
+              {/* <Route exact path="/" component={Introduction} /> 
+              <Route exact path="/login" component={Login} /> */}
               <Route exact path="/" component={Login} />
               <Route exact path="/create" component={Create} />
               <Route exact path="/user" component={Tree} />
               <Route exact path="/stores" component={Stores} />
               <Route exact path="/terms" component={htmlData} />
+
 
               {/* <PublicRoute path="/login" component={Login} /> */}
               {/* <PrivateRoute path="/dashboard" component={Dashboard} /> */}

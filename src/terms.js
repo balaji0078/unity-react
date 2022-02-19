@@ -1,7 +1,7 @@
 
 import React, { useState,useEffect } from 'react';
 
-var htmlData = `<p style="line-height: 115%;text-align: center;background: transparent;margin-bottom: 0cm;">TERMS OF SERVICE</p>
+var htmlData = <div dangerouslySetInnerHTML={{ __html:`<p style="line-height: 115%;text-align: center;background: transparent;margin-bottom: 0cm;">TERMS OF SERVICE</p>
 <p style="line-height: 115%;text-align: center;background: transparent;margin-bottom: 0cm;"><br></p>
 <p style="line-height: 115%;text-align: left;margin-bottom: 0cm;background: transparent;"><br></p>
 <p style="line-height: 115%;text-align: left;margin-bottom: 0cm;background: transparent;">OVERVIEW</p>
@@ -349,7 +349,7 @@ var htmlData = `<p style="line-height: 115%;text-align: center;background: trans
 <p style='line-height: 100%;text-align: left;margin-bottom: 0cm;background: transparent;font-family: "Arial", serif;margin-left: 1.27cm;'>Navalur, CH-600130</p>
 <p style='line-height: 100%;text-align: left;margin-bottom: 0cm;background: transparent;font-family: "Arial", serif;'>Ph No - 9884588854</p>
 <p style='line-height: 100%;text-align: left;margin-bottom: 0cm;background: transparent;font-family: "Arial", serif;'>Mail ID - <u><a href="mailto:digitalunityecom@gmail.com">digitalunityecom@gmail.com</a></u></p>
-<p style='line-height: 100%;text-align: left;margin-bottom: 0cm;background: transparent;font-family: "Arial", serif;'><br></p>`
+<p style='line-height: 100%;text-align: left;margin-bottom: 0cm;background: transparent;font-family: "Arial", serif;'><br></p>`}}/>
 
 
 function Terms(props) {
