@@ -118,7 +118,7 @@ const dataWithCollapsedProperties = [
   }
 ]
 
-const Vertical = 'horizontal'
+const Vertical = 'vertical'
 class MyUserComponent extends React.Component {
 
 
@@ -165,9 +165,9 @@ class MyUserComponent extends React.Component {
     {this.state.data.length >= 1 && 
         <Tree data={this.state.data[0]} 
          shouldCollapseNeighborNodes={true}
-         translate={{x:70, y: 120}}	
-         Orientation={Vertical}
-        />
+         translate={{x:670, y: 120}}	
+         orientation={Vertical}
+        />  
     }
       </div>
     );
