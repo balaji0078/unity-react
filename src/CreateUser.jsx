@@ -128,7 +128,7 @@ function loadScript(src) {
 			return
 		}
 
-		const data = await fetch('http://54.194.76.216:5000/razorpay', { method: 'POST' }).then((t) =>
+		const data = await fetch('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/razorpay', { method: 'POST' }).then((t) =>
 			t.json()
 		)
 
@@ -153,7 +153,7 @@ function loadScript(src) {
 					type:dropDownType
 				  }
 			     if(response){
-					axios.post('http://54.194.76.216:5000/create', body).then(response => {
+					axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
 						setSpinner(false)
 						console.log(response.status==200)
 						alert("user created succesfully !!!!!!")
