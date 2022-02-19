@@ -144,7 +144,7 @@ class MyUserComponent extends React.Component {
     }
     
 
-    axios.post('http://54.194.76.216:5000/getchildList', {scheme:1},{headers:headers}).then(response => {
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/getchildList', {scheme:1},{headers:headers}).then(response => {
 
     this.setState({data:response.data})
 
