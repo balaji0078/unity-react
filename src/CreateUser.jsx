@@ -59,9 +59,15 @@ const handleSubmit = async(e) => {
 	} 
   else
    {
-    
-    setError(false);
-	   axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
+	let body ={
+		name:name,
+		mobile:email,
+		address:address,
+		referrer:refferal,
+		areaId:1,
+		type:dropDownType
+	  }
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
 						setSpinner(false)
 						console.log(response.status==200)
 						alert("user created succesfully !!!!!!")
@@ -71,7 +77,8 @@ const handleSubmit = async(e) => {
 						alert("user not created please contact admin!!!!!!")
 						props.location.reload();
 					});
-	//await displayRazorpay();
+    // setError(false); 
+	// await displayRazorpay();
 	//   console.log(verifyPay,"vpayyyy")
 
 	//   if(verifyPay=='success'){
@@ -85,6 +92,7 @@ const handleSubmit = async(e) => {
 
 const selectType = (e) =>{
   setDropDownType(e.target.value)
+  console.log(e.target.value,"eeeedrcrrdcre")
   }
 
 // Showing success message
