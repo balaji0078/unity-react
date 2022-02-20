@@ -67,6 +67,10 @@ const handleSubmit = async(e) => {
 		areaId:1,
 		type:dropDownType
 	  }
+    	  if(dropDownType==2){
+		  delete body.referrer
+	  }
+	
     axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
 						setSpinner(false)
 						console.log(response.status==200)
