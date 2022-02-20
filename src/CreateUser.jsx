@@ -60,8 +60,18 @@ const handleSubmit = async(e) => {
   else
    {
     
-    setError(false); 
-	await displayRazorpay();
+    setError(false);
+	   axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
+						setSpinner(false)
+						console.log(response.status==200)
+						alert("user created succesfully !!!!!!")
+						props.history.push('/');
+					  }).catch(error => {
+				
+						alert("user not created please contact admin!!!!!!")
+						props.location.reload();
+					});
+	//await displayRazorpay();
 	//   console.log(verifyPay,"vpayyyy")
 
 	//   if(verifyPay=='success'){
@@ -75,7 +85,6 @@ const handleSubmit = async(e) => {
 
 const selectType = (e) =>{
   setDropDownType(e.target.value)
-  console.log(e.target.value,"eeeedrcrrdcre")
   }
 
 // Showing success message
