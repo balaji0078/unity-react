@@ -435,6 +435,9 @@ const contactUS = () =>{
             <a style={{marginLeft:17}} href='/contact' >
             <label className='ml-2' >Contact Us</label>
             </a>
+            <a style={{marginLeft:17}} href='/aboutus' >
+            <label className='ml-2' >About Us</label>
+            </a>
 
             {/* <NavLink activeClassName="active" to="https://policywrite.s3.ap-south-1.amazonaws.com/Doc1.docx">Login</NavLink> */}
 
@@ -443,13 +446,17 @@ const contactUS = () =>{
           </div>
           <div className="content">
             <Switch>
-              <Route exact path="/" component={Model} /> 
+              {/* <Route exact path="/" component={Model} />  */}
               <Route exact path="/login" component={Login} />
               <Route exact path="/create" component={Create} />
               <Route exact path="/user" component={Tree} />
               <Route exact path="/stores" component={Stores} />
               <Route exact path="/terms" component={htmlData} />
               <Route exact path="/contact" component={contactUS} />
+              <Route exact path="/" component={Login} />
+              <Route exact path="/aboutus" component={Introduction} />
+
+
 
 
 
