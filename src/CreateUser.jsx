@@ -59,9 +59,30 @@ const handleSubmit = async(e) => {
 	} 
   else
    {
-    
-    setError(false); 
-	await displayRazorpay();
+	let body ={
+		name:name,
+		mobile:email,
+		address:address,
+		referrer:refferal,
+		areaId:1,
+		type:dropDownType
+	  }
+    	  if(dropDownType==2){
+		  delete body.referrer
+	  }
+	
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
+						setSpinner(false)
+						console.log(response.status==200)
+						alert("user created succesfully !!!!!!")
+						props.history.push('/');
+					  }).catch(error => {
+				
+						alert("user not created please contact admin!!!!!!")
+						props.location.reload();
+					});
+    // setError(false); 
+	// await displayRazorpay();
 	//   console.log(verifyPay,"vpayyyy")
 
 	//   if(verifyPay=='success'){
