@@ -2,6 +2,11 @@ import React from 'react';
 import Tree from 'react-hierarchy-tree-graph';
 import { Select, Box } from 'theme-ui'
 import axios from 'axios';
+import { Placeholder } from 'rsuite';
+
+
+
+const { Paragraph } = Placeholder;
 
 const dataWithCollapsedProperties = [
   {
@@ -160,8 +165,53 @@ class MyUserComponent extends React.Component {
 
   }
   render() {
+    let coupon = sessionStorage.getItem('coupon')
+    let pin = sessionStorage.getItem('pin')
+    let name = localStorage.getItem('name')
+    let mobile = sessionStorage.getItem('mobile')
+
+    
+    // let parsedData = JSON.parse(data)
+    // console.log(parsedData,"parsedData")
+
     return (
-      <div id="treeWrapper" style={{width: '100em', height: '100em'}}> 
+    <>
+      <div className='row'>
+      <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+          Name: {name}
+        </small>
+        <br/>
+        </p>
+      </div>
+    <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+          Coupon: {coupon}
+        </small>
+        <br/>
+      </p>
+      </div>
+      <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+          Mobile: {mobile}
+        </small>
+        <br/>
+      </p>
+      </div>
+      <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+          Pin: {pin}
+        </small>
+        <br/>
+      </p>
+      </div>
+      </div>
+
+      <div id="treeWrapper" style={{width: '100em', height: '100em'}}>
     {this.state.data.length >= 1 && 
         <Tree data={this.state.data[0]} 
          shouldCollapseNeighborNodes={true}
@@ -170,6 +220,7 @@ class MyUserComponent extends React.Component {
         />  
     }
       </div>
+    </>
     );
   }
 }

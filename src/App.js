@@ -12,7 +12,7 @@ import Model from './introModel'
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
-
+import PayForm from './Payform'
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -455,6 +455,8 @@ const contactUS = () =>{
               <Route exact path="/contact" component={contactUS} />
               <Route exact path="/" component={Login} />
               <Route exact path="/aboutus" component={Introduction} />
+              <Route exact path="/payform" component={PayForm} />
+
 
 
 

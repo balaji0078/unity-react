@@ -46,9 +46,21 @@ function Login(props) {
       localStorage.setItem('token', token);
       localStorage.setItem('uid', id);
       localStorage.setItem('name', name);
+      sessionStorage.setItem('coupon', res.data.data.coupon);
+      sessionStorage.setItem('mobile', res.data.data.mobile);
+      sessionStorage.setItem('scheme', res.data.data.scheme);
+      sessionStorage.setItem('pin', res.data.data.pin);
       setLoading(false);
+      console.log(res.data.data.referral_code,"codee")
+      // props.history.push('/stores');
+
+      if(res.data.data.referral_code=="2"){
+      props.history.push('/payform');
+      }
+      else{
       // setUserSession(response.data.token, response.data.user);
       props.history.push('/stores');
+      }
     }).catch(error => {
       setLoading(false);
       // if (error.response.status === 401) setError(error.response.data.message);

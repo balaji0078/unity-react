@@ -44,7 +44,7 @@ return <div>
 {data && data.map((item) => (
 <>     
 <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 1120, height:380 }}>
-    <img src="https://via.placeholder.com/240x240" height="240" />
+    {/* <img src="https://via.placeholder.com/240x240" height="240" /> */}
     <Panel header="STORE">
       <div className='row'>
       <div className='col-4'>
