@@ -63,11 +63,11 @@ return <div>
           <HeaderCell>product</HeaderCell>
           <Cell dataKey="product" />
         </Column>
-        <Column width={100} >
+        <Column width={200} >
           <HeaderCell>Transaction Amount</HeaderCell>
           <Cell dataKey="amount" />
         </Column>
-        <Column width={100} >
+        <Column width={200} >
           <HeaderCell>Balance Credit Amount</HeaderCell>
           <Cell dataKey="credit_amount" />
         </Column>
