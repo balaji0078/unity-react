@@ -13,6 +13,7 @@ import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
 import PayForm from './Payform'
+import ShopTable from './shopTable'
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -426,9 +427,12 @@ const contactUS = () =>{
         <div>
           <div className="header">
             <NavLink activeClassName="active" to="/user">User</NavLink>
-            <NavLink activeClassName="active" to="/Create">SignIn</NavLink>
+            {/* <NavLink activeClassName="active" to="/Create">SignIn</NavLink> */}
            <NavLink activeClassName="active" to="/login">Login</NavLink>
            <NavLink activeClassName="active" to="/stores">Stores</NavLink>
+           <NavLink activeClassName="active" to="/payform">Coupon Redeem</NavLink>
+           <NavLink activeClassName="active" to="/shoptable">Shop Table</NavLink>
+
             <a style={{marginLeft:17}} href='/terms' >
             <label className='ml-2' >Terms and Privacy Policy</label>
             </a>
@@ -448,7 +452,7 @@ const contactUS = () =>{
             <Switch>
               {/* <Route exact path="/" component={Model} />  */}
               <Route exact path="/login" component={Login} />
-              <Route exact path="/create" component={Create} />
+              {/* <Route exact path="/create" component={Create} /> */}
               <Route exact path="/user" component={Tree} />
               <Route exact path="/stores" component={Stores} />
               <Route exact path="/terms" component={htmlData} />
@@ -456,6 +460,7 @@ const contactUS = () =>{
               <Route exact path="/" component={Login} />
               <Route exact path="/aboutus" component={Introduction} />
               <Route exact path="/payform" component={PayForm} />
+              <Route exact path="/shoptable" component={ShopTable} />
 
 
 

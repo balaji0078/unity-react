@@ -43,7 +43,7 @@ const renderStores = () =>{
 return <div>
 {data && data.map((item) => (
 <>     
-<Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 1120, height:380 }}>
+<Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 1120, height:180 }}>
     {/* <img src="https://via.placeholder.com/240x240" height="240" /> */}
     <Panel header="STORE">
       <div className='row'>
@@ -58,7 +58,7 @@ return <div>
       <div className='col-4'> 
       <p>
         <small style={{fontWeight:'bold'}}>
-          Address:  {item.address}
+         <a href={item.address}>Address:{item.address}</a>
         </small>
         <br/>
       </p>
@@ -67,6 +67,14 @@ return <div>
       <p>
         <small style={{fontWeight:'bold'}}>
           mobile:  {item.mobile}
+        </small>
+        <br/>
+      </p>
+      </div>
+      <div className='col-4'> 
+      <p>
+        <small style={{fontWeight:'bold'}}>
+          Credit Available:  {item.amount}
         </small>
         <br/>
       </p>
