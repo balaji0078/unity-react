@@ -60,12 +60,16 @@ return <div>
           <Cell dataKey="name" />
         </Column>
         <Column width={300} >
-          <HeaderCell>product</HeaderCell>
+          <HeaderCell>Product</HeaderCell>
           <Cell dataKey="product" />
         </Column>
-        <Column width={100} >
+        <Column width={200} >
           <HeaderCell>Transaction Amount</HeaderCell>
           <Cell dataKey="amount" />
+        </Column>
+        <Column width={200} >
+          <HeaderCell>Balance Credit Amount</HeaderCell>
+          <Cell dataKey="credit_amount" />
         </Column>
       </Table>
     </div>  </>
