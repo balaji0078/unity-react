@@ -2,6 +2,8 @@
 import React, { useState,useEffect } from 'react';
 import { Panel, PanelGroup, Placeholder } from 'rsuite';
 import axios from 'axios';
+import { Table } from 'rsuite';
+
 
 
 function StoreList(props) {
@@ -24,7 +26,7 @@ const getShops = () =>{
 
     }
     if(token!=null){
-    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/getShopList',{},{headers:headers}).then(response => {
+    axios.get('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/purchasedList',{headers:headers}).then(response => {
     setData(response.data.data)
 
 }).catch(error => {
@@ -32,62 +34,46 @@ const getShops = () =>{
   }); 
 }
 
-   
-
-
 }
 
 const renderStores = () =>{
     console.log(data)
+ const {Cell,Column,HeaderCell} =  Table
 
 return <div>
-{data && data.map((item) => (
+{data && (
 <>     
-<Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 1120, height:180 }}>
-    {/* <img src="https://via.placeholder.com/240x240" height="240" /> */}
-    <Panel header="STORE">
-      <div className='row'>
-      <div className='col-4'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          Shop name:  {item.name}
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-4'> 
-      <p>
-        <small style={{fontWeight:'bold'}}>
-         <a  target="_blank">Address:{item.address}</a>
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-4'> 
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          mobile:  {item.mobile}
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-4'> 
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          Credit Available:  {item.amount}
-        </small>
-        <br/>
-      </p>
-      </div>
-      </div>
-      <br/>
-    </Panel>
-    </Panel>
-    <br/>
-    <br/>
-
-  </>
-))}
+<div>
+<Table
+      virtualized
+      height={400}
+      data={data}
+      onRowClick={data => {
+        console.log(data);
+      }}
+    >        <Column width={50} align="center" fixed>
+          <HeaderCell>Id</HeaderCell>
+          <Cell dataKey="id" />
+        </Column>
+        <Column width={300} >
+          <HeaderCell>Shop Name</HeaderCell>
+          <Cell dataKey="name" />
+        </Column>
+        <Column width={300} >
+          <HeaderCell>product</HeaderCell>
+          <Cell dataKey="product" />
+        </Column>
+        <Column width={100} >
+          <HeaderCell>Transaction Amount</HeaderCell>
+          <Cell dataKey="amount" />
+        </Column>
+        <Column width={100} >
+          <HeaderCell>Balance Credit Amount</HeaderCell>
+          <Cell dataKey="credit_amount" />
+        </Column>
+      </Table>
+    </div>  </>
+   )}
 </div>
 
 }
