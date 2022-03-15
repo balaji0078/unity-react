@@ -58,7 +58,7 @@ return <div>
       <div className='col-4'> 
       <p>
         <small style={{fontWeight:'bold'}}>
-         <a href={item.address}>Address:{item.address}</a>
+         <a href=`https://${item.address}` target ='_blank'>Address:{item.address}</a>
         </small>
         <br/>
       </p>
