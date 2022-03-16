@@ -51,7 +51,13 @@ return <div>
       onRowClick={data => {
         console.log(data);
       }}
-    >  <Column width={300} align="center" fixed>
+    >  
+          <Column width={350} >
+          <HeaderCell>Created On</HeaderCell>
+          <Cell dataKey="created_on" />
+          </Column>
+
+        <Column width={300} align="center" fixed>
           <HeaderCell>Product / Service</HeaderCell>
           <Cell dataKey="product" />
         </Column>
@@ -59,17 +65,13 @@ return <div>
           <HeaderCell>Transaction Amount</HeaderCell>
           <Cell dataKey="amount" />
         </Column>
-        <Column width={350} >
-          <HeaderCell>Created On</HeaderCell>
-          <Cell dataKey="created_on" />
+        <Column width={200} >
+          <HeaderCell>Credited Amount</HeaderCell>
+          <Cell dataKey="admin_amount" />
         </Column>
         <Column width={100} >
           <HeaderCell>Balance Credit Amount</HeaderCell>
           <Cell dataKey="credit_amount" />
-        </Column>
-        <Column width={200} >
-          <HeaderCell>Credited Amount</HeaderCell>
-          <Cell dataKey="admin_amount" />
         </Column>
       </Table>
     </div>  </>
