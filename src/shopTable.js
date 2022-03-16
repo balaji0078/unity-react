@@ -52,22 +52,18 @@ return <div>
         console.log(data);
       }}
     >  <Column width={300} align="center" fixed>
-          <HeaderCell>Shop Name</HeaderCell>
-          <Cell dataKey="name" />
-        </Column>
-        <Column width={300} >
           <HeaderCell>Product / Service</HeaderCell>
           <Cell dataKey="product" />
         </Column>
-        <Column width={200} >
+        <Column width={100} >
           <HeaderCell>Transaction Amount</HeaderCell>
           <Cell dataKey="amount" />
         </Column>
-        <Column width={200} >
+        <Column width={350} >
           <HeaderCell>Created On</HeaderCell>
           <Cell dataKey="created_on" />
         </Column>
-        <Column width={200} >
+        <Column width={100} >
           <HeaderCell>Balance Credit Amount</HeaderCell>
           <Cell dataKey="credit_amount" />
         </Column>
