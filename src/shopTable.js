@@ -52,24 +52,24 @@ return <div>
         console.log(data);
       }}
     >  
-          <Column width={350} >
+          <Column width={350} resizable>
           <HeaderCell>Created On</HeaderCell>
           <Cell dataKey="created_on" />
           </Column>
 
-        <Column width={300} align="center" fixed>
+        <Column width={200} align="center" resizable>
           <HeaderCell>Product / Service</HeaderCell>
           <Cell dataKey="product" />
         </Column>
-        <Column width={100} >
+        <Column width={100} resizable>
           <HeaderCell>Transaction Amount</HeaderCell>
           <Cell dataKey="amount" />
         </Column>
-        <Column width={200} >
+        <Column width={100} resizable>
           <HeaderCell>Credited Amount</HeaderCell>
           <Cell dataKey="admin_amount" />
         </Column>
-        <Column width={100} >
+        <Column width={100} resizable>
           <HeaderCell>Balance Credit Amount</HeaderCell>
           <Cell dataKey="credit_amount" />
         </Column>
