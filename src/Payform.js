@@ -85,7 +85,7 @@ const handleSubmit = async(e) => {
 						props.history.push('/payform');
 					  }).catch(error => {
 				
-						alert(`${error}`)
+						alert(`${error.statusText}`)
 					});
         }
     // setError(false); 
