@@ -56,7 +56,7 @@ const handleEmail = (e) => {
 
 // Handling the form submission
 const handleSubmit = async(e) => {
-	// e.preventDefault();
+	 e.preventDefault();
 	if (Coupon === '' || product === '' || amount==='' || pin==='') {
 	setError(true);
 	} 
@@ -69,13 +69,14 @@ const handleSubmit = async(e) => {
 		amount:amount,
 		pin:pin
 	  }
+         alert(body)
+	
     let token = localStorage.getItem('token');
     const headers = {
       'x-access-token': token
     }
 	
     if(token!=null){
-     alert(body)
   
     axios.post(' https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/copounRedeem', body,{headers:headers}).then(response => {
 						setSpinner(false)
