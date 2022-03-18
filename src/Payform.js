@@ -69,7 +69,7 @@ const handleSubmit = async(e) => {
 		amount:amount,
 		pin:pin
 	  }
-         alert(body)
+         alert(JSON.stringify(body))
 	
     let token = localStorage.getItem('token');
     const headers = {
