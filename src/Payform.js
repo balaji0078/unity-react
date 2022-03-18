@@ -66,15 +66,15 @@ const handleSubmit = async(e) => {
 		coupon:Coupon,
 		product:product,
 		type:dropDownType,
-    amount:amount,
-    pin:pin
+		amount:amount,
+		pin:pin
 	  }
     let token = localStorage.getItem('token');
     console.log(token,"tokentoken")
     const headers = {
       'x-access-token': token
-
     }
+	
     if(token!=null){
 
   
@@ -163,35 +163,35 @@ return (
 
 	<form>
 		{/* Labels and inputs for form data */}
-    <div className='row col-2'>
+    <div className='row col-2'style={{width:'fit-content'}}>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon</label>
 		<input onChange={handleName} style={{marginLeft:'12px'}}  className="form-control"
 		value={Coupon} type="text"  />
     </div>
-    <div className='row col-2'>
+    <div className='row col-2' style={{width:'fit-content'}}>
 	  <label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon Type</label>
     <Select defaultValue="1" rows={15} onClick={(e)=>selectType(e)}>
         <option value={"1"}>Cashback</option>
         <option value={"2"}>Product</option>
     </Select>
     </div>
-    <div className='row col-2'>
+    <div className='row col-2'style={{width:'fit-content'}}>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Products</label>
 		<input onChange={handleProducts} style={{marginLeft:'12px'}} className="form-control"
 		value={product} type="text" />
     </div>
-    <div className='row col-2'>
+    <div className='row col-2' style={{width:'fit-content'}}>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Pin</label>
 		<input onChange={handlePin} style={{marginLeft:'12px'}} className="form-control"
 		value={pin} type="email" />
     </div>
 
-    <div className='row col-2'>
+    <div className='row col-2' style={{width:'fit-content'}}>
     <label className="label fs-6" style={{paddingLeft:'12px'}}>Amount</label>
 		<input onChange={handleAmount} style={{marginLeft:'12px'}} className="form-control"
 		value={amount} type="email" />
     </div>
-    <div className='row col-2 pt-4'>
+    <div className='row col-2 pt-4'style={{width:'fit-content'}}>
 		<button onClick={handleSubmit} className="btn btn-primary" type="submit" style={{marginLeft:6}}>
 		Submit
 		</button>
