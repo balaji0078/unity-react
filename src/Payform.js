@@ -70,7 +70,6 @@ const handleSubmit = async(e) => {
 		pin:pin
 	  }
     let token = localStorage.getItem('token');
-    console.log(token,"tokentoken")
     const headers = {
       'x-access-token': token
     }
@@ -86,7 +85,7 @@ const handleSubmit = async(e) => {
 						props.history.push('/payform');
 					  }).catch(error => {
 				
-						alert("Transaction is failure please contact admin!!!!!!")
+						alert(`${error}`)
 					});
         }
     // setError(false); 
