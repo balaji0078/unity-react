@@ -75,7 +75,7 @@ const handleSubmit = async(e) => {
     }
 	
     if(token!=null){
-
+     alert(body)
   
     axios.post(' https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/copounRedeem', body,{headers:headers}).then(response => {
 						setSpinner(false)
@@ -182,13 +182,13 @@ return (
     <div className='row col-2' style={{width:'fit-content'}}>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Pin</label>
 		<input onChange={handlePin} style={{marginLeft:'12px'}} className="form-control"
-		value={pin} type="email" />
+		value={pin} type="text" />
     </div>
 
     <div className='row col-2' style={{width:'fit-content'}}>
     <label className="label fs-6" style={{paddingLeft:'12px'}}>Amount</label>
 		<input onChange={handleAmount} style={{marginLeft:'12px'}} className="form-control"
-		value={amount} type="email" />
+		value={amount} type="text" />
     </div>
     <div className='row col-2 pt-4'style={{width:'fit-content'}}>
 		<button onClick={handleSubmit} className="btn btn-primary" type="submit" style={{marginLeft:6}}>
