@@ -46,6 +46,8 @@ function Login(props) {
       localStorage.setItem('token', token);
       localStorage.setItem('uid', id);
       localStorage.setItem('name', name);
+      sessionStorage.setItem('referral_code', res.data.data.referral_code);
+      sessionStorage.setItem('amount', res.data.data.amount);
       sessionStorage.setItem('coupon', res.data.data.coupon);
       sessionStorage.setItem('mobile', res.data.data.mobile);
       sessionStorage.setItem('scheme', res.data.data.scheme);
