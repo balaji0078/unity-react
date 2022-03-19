@@ -2,13 +2,13 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/react-in-jsx-scope */
 import React,{useState} from 'react'
-import { Dropdown,Message, toaster,Loader,Paragraph } from 'rsuite';
+import { Dropdown,Message, toaster,Loader,Paragraph,Form,RadioGroup,Radio } from 'rsuite';
 import { Select,Box,Textarea,Spinner } from 'theme-ui'
 import axios from 'axios';
 import 'rsuite/dist/rsuite.min.css'
 
 
-export default function Form(props) {
+export default function Forms(props) {
 
 // States for registration
 const [Coupon, setCoupon] = useState('');
@@ -42,6 +42,15 @@ const handleName = (e) => {
 // }
 
 // Handling the email change
+
+const styles = {
+	radioGroupLabel: {
+	  padding: '8px 2px 8px 10px',
+	  display: 'inline-block',
+	  verticalAlign: 'middle'
+	}
+  };
+  
 const handleEmail = (e) => {
 	setEmail(e.target.value);
 	setSubmitted(false);
@@ -71,6 +80,7 @@ const handleSubmit = async(e) => {
 	  }
 
 	  alert(dropDownType)
+
     let token = localStorage.getItem('token');
     const headers = {
       'x-access-token': token
@@ -87,7 +97,7 @@ const handleSubmit = async(e) => {
 						props.history.push('/payform');
 					  }).catch(error => {
 				
-						alert(`${error.statusText}`)
+						alert(`${error}`)
 					});
         }
     // setError(false); 
@@ -104,8 +114,13 @@ const handleSubmit = async(e) => {
 };
 
 const selectType = (e) =>{
-  setDropDownType(e.target.value)
-  console.log(e.target.value,"eeeedrcrrdcre")
+	if(e=="1"){
+		setDropDownType(1)	
+	}
+	else{
+		setDropDownType(2)	
+	}
+//   setDropDownType(e.target.value)
   }
 
 const handleProducts = (e) =>{
@@ -169,13 +184,27 @@ return (
 		<input onChange={handleName} style={{marginLeft:'12px'}}  className="form-control"
 		value={Coupon} type="text"  />
     </div>
-    <div className='row col-2' style={{width:'fit-content'}}>
+	<div className='row col-2 mt-4' style={{width:'fit-content'}}>
+	  {/* <label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon Type</label> */}
+	<Form.Group controlId="radioList" onChange={(e)=>selectType(e)}>
+    <RadioGroup name="radioList" inline appearance="picker" defaultValue="1">
+      <span style={styles.radioGroupLabel}>Coupon Type: </span>
+      <Radio value="1">CashBack</Radio>
+      <Radio value="2">Products</Radio>
+    </RadioGroup>
+  </Form.Group>
+  </div>
+
+    {/* <div className='row col-2' style={{width:'fit-content'}}>
 	  <label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon Type</label>
-    <Select defaultValue="1" rows={15} onClick={(e)=>selectType(e)}>
-        <option value={"1"}>Cashback</option>
-        <option value={"2"}>Product</option>
-    </Select>
-    </div>
+	  <Form.Group controlId="radioList">
+    <RadioGroup name="radioList" inline appearance="picker" defaultValue="A">
+      <span style={styles.radioGroupLabel}>Status: </span>
+      <Radio value="A">CashBack</Radio>
+      <Radio value="B">Products</Radio>
+    </RadioGroup>
+  </Form.Group>
+    </div> */}
     <div className='row col-2'style={{width:'fit-content'}}>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Products</label>
 		<input onChange={handleProducts} style={{marginLeft:'12px'}} className="form-control"
