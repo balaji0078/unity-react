@@ -65,7 +65,7 @@ const handleEmail = (e) => {
 
 // Handling the form submission
 const handleSubmit = async(e) => {
-	// e.preventDefault();
+	 e.preventDefault();
 	if (Coupon === '' || product === '' || amount==='' || pin==='') {
 	setError(true);
 	} 
