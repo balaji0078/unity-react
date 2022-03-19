@@ -169,6 +169,9 @@ class MyUserComponent extends React.Component {
     let pin = sessionStorage.getItem('pin')
     let name = localStorage.getItem('name')
     let mobile = sessionStorage.getItem('mobile')
+    let referral = sessionStorage.getItem('referral_code')
+    let amount = sessionStorage.getItem('amount')
+
 
     
     // let parsedData = JSON.parse(data)
@@ -188,7 +191,7 @@ class MyUserComponent extends React.Component {
     <div className='col-3'>
       <p>
         <small style={{fontWeight:'bold'}}>
-          Coupon: {coupon}
+        Referral Code: {referral}
         </small>
         <br/>
       </p>
@@ -210,6 +213,29 @@ class MyUserComponent extends React.Component {
       </p>
       </div>
       </div>
+      <div className='row'>
+      <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+        Coupon: {coupon}
+        </small>
+        <br/>
+      </p>
+      </div>
+      <div className='col-3'>
+      <p>
+        <small style={{fontWeight:'bold'}}>
+        Credited Amount: {amount}
+        </small>
+        <br/>
+      </p>
+      </div>
+
+      </div>
+
+
+
+
 
       <div id="treeWrapper" style={{width: '100em', height: '100em'}}>
     {this.state.data.length >= 1 && 
