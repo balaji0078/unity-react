@@ -79,7 +79,6 @@ const handleSubmit = async(e) => {
 		pin:pin
 	  }
 
-	  alert(dropDownType)
 
     let token = localStorage.getItem('token');
     const headers = {
