@@ -427,7 +427,7 @@ const contactUS = () =>{
         <div>
           <div className="header">
             <NavLink activeClassName="active" to="/user">User</NavLink>
-            {/* <NavLink activeClassName="active" to="/Create">SignIn</NavLink> */}
+            <NavLink activeClassName="active" to="/Create">SignIn</NavLink>
            <NavLink activeClassName="active" to="/login">Login</NavLink>
            <NavLink activeClassName="active" to="/stores">Stores</NavLink>
            <NavLink activeClassName="active" to="/payform">Coupon Redeem</NavLink>
@@ -452,7 +452,7 @@ const contactUS = () =>{
             <Switch>
               {/* <Route exact path="/" component={Model} />  */}
               <Route exact path="/login" component={Login} />
-              {/* <Route exact path="/create" component={Create} /> */}
+              <Route exact path="/create" component={Create} />
               <Route exact path="/user" component={Tree} />
               <Route exact path="/stores" component={Stores} />
               <Route exact path="/terms" component={htmlData} />
