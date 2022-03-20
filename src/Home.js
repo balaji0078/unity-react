@@ -131,11 +131,13 @@ class MyUserComponent extends React.Component {
     super();
     this.state = {
       data: [],
+      setUserData: [],
     };
     // Binding method
   }
   componentDidMount(){
     this.userChild();
+    this.UserAmtCoupon();
   }
 
 
@@ -164,6 +166,24 @@ class MyUserComponent extends React.Component {
     }); 
 
   }
+
+  UserAmtCoupon = async() =>{
+    let token = localStorage.getItem('token');
+    console.log(token,"tokentoken")
+    const headers = {
+      'x-access-token': token,
+      'Content-Type': 'application/json'
+    }
+
+    if(token!=null){
+    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userAmtCoupon',{},{headers:headers}).then(response => {
+ 
+    this.setState({setUserData : response.data.data})
+  }).catch(error => {
+    alert(error)
+  }); 
+  }
+  }
   render() {
     let coupon = sessionStorage.getItem('coupon')
     let pin = sessionStorage.getItem('pin')
@@ -175,63 +195,65 @@ class MyUserComponent extends React.Component {
 
     
     // let parsedData = JSON.parse(data)
-    // console.log(parsedData,"parsedData")
+     console.log(this.state.setUserData,"parsedData")
 
     return (
     <>
-      <div className='row'>
-      <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          Name: {name}
-        </small>
-        <br/>
-        </p>
-      </div>
-    <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-        Referral Code: {referral}
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          Mobile: {mobile}
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-          Pin: {pin}
-        </small>
-        <br/>
-      </p>
-      </div>
-      </div>
-      <div className='row'>
-      <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-        Coupon: {coupon}
-        </small>
-        <br/>
-      </p>
-      </div>
-      <div className='col-3'>
-      <p>
-        <small style={{fontWeight:'bold'}}>
-        Credited Amount: {amount}
-        </small>
-        <br/>
-      </p>
-      </div>
+  {this.state.setUserData.length >= 1 &&  (      
+      <><div className='row'>
+            <div className='col-3'>
+              <p>
+                <small style={{ fontWeight: 'bold' }}>
+                  Name: {name}
+                </small>
+                <br />
+              </p>
+            </div>
+            <div className='col-3'>
+              <p>
+                <small style={{ fontWeight: 'bold' }}>
+                  Referral Code: {referral}
+                </small>
+                <br />
+              </p>
+            </div>
+            <div className='col-3'>
+              <p>
+                <small style={{ fontWeight: 'bold' }}>
+                  Mobile: {mobile}
+                </small>
+                <br />
+              </p>
+            </div>
+            <div className='col-3'>
+              <p>
+                <small style={{ fontWeight: 'bold' }}>
+                  Pin: {pin}
+                </small>
+                <br />
+              </p>
+            </div>
+          </div><div className='row'>
+              <div className='col-3'>
+                <p>
+                  <small style={{ fontWeight: 'bold' }}>
+                    Coupon: {this.state.setUserData[0].coupon}
+                  </small>
+                  <br />
+                </p>
+              </div>
+              <div className='col-3'>
+                <p>
+                  <small style={{ fontWeight: 'bold' }}>
+                    Credited Amount: {this.state.setUserData[0].amount}
+                  </small>
+                  <br />
+                </p>
 
-      </div>
+              </div>
+
+            </div></>
+   )}    
 
 
 
