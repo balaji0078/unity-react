@@ -186,7 +186,7 @@ class MyUserComponent extends React.Component {
   }
   render() {
     let coupon = sessionStorage.getItem('coupon')
-//     let pin = sessionStorage.getItem('pin')
+    let pin = sessionStorage.getItem('pin')
     let name = localStorage.getItem('name')
     let mobile = sessionStorage.getItem('mobile')
     let referral = sessionStorage.getItem('referral_code')
@@ -228,7 +228,8 @@ class MyUserComponent extends React.Component {
             <div className='col-3'>
               <p>
                 <small style={{ fontWeight: 'bold' }}>
-                  Pin: {this.state.setUserData[0].otp}
+                   Pin: {this.state.setUserData[0].otp?pin:pin}
+                  
                 </small>
                 <br />
               </p>
