@@ -5,7 +5,10 @@ import React,{useState} from 'react'
 import { Dropdown,Message, toaster,Loader,Paragraph } from 'rsuite';
 import { Select,Box,Textarea,Spinner } from 'theme-ui'
 import axios from 'axios';
-import 'rsuite/dist/rsuite.min.css'
+import 'rsuite/dist/rsuite.min.css';
+import IppoPay from './IppoPay';
+import {pathOr} from 'ramda'
+// import fetch from 'node-fetch';
 
 
 export default function Form(props) {
@@ -17,6 +20,8 @@ const [refferal, setReferral] = useState('');
 const [dropDownType, setDropDownType] = useState(1);
 const [address, setAddress] = useState('');
 const [enableSpinner, setSpinner] = useState(false);
+const [openUrl,setOpenUrl]= useState(false);
+const [orderIds, setorderIds] = useState('');
 
 
 // States for checking the errors
@@ -54,12 +59,21 @@ const handleRefferal = (e) => {
 // Handling the form submission
 const handleSubmit = async(e) => {
 	e.preventDefault();
-	if (name === '' || email === '') {
-	setError(true);
-	} 
-  else
-   {
-	let body ={
+	let amount = 118.00
+	if (name === '' || email === '',refferal ==='') {
+	   setError(true);
+	}
+ 
+	const headers = {
+		'Content-Type': 'application/json'
+	  }
+	let ippPayBody = {
+        "amount": amount,
+        "name": name,
+        "email": email,
+    }
+
+		let body ={
 		name:name,
 		mobile:email,
 		address:address,
@@ -67,36 +81,69 @@ const handleSubmit = async(e) => {
 		areaId:1,
 		type:dropDownType
 	  }
-    	  if(dropDownType==2){
-		  delete body.referrer
-	  }
-	
-    axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
+
+	    await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/createOrderID',ippPayBody,{headers:headers}).then(response => {
 						setSpinner(false)
-						console.log(response.status==200)
-						alert("user created succesfully !!!!!!")
-						props.history.push('/');
+						console.log(response.status==200,"order id created")
+						let orderId = pathOr('',['data','data','order','order_id'],response)
+						setorderIds(orderId)
+
+
+						console.log(orderId,"orderId")
+						if(response.status==200){
+							setOpenUrl(true)
+
+						}
+						// alert("user created succesfully !!!!!!")
+						//props.history.push('/');
 					  }).catch(error => {
 				
-						alert("user not created please contact admin!!!!!!")
+						alert("user and order id is not created please contact admin!!!!!!")
 						props.location.reload();
 					});
-    // setError(false); 
-	// await displayRazorpay();
-	//   console.log(verifyPay,"vpayyyy")
 
-	//   if(verifyPay=='success'){
+// 	if (name === '' || email === '') {
+// 	setError(true);
+// 	} 
+//   else
+//    {
+	// 	let body ={
+	// 		name:name,
+	// 		mobile:email,
+	// 		address:address,
+	// 		referrer:refferal,
+	// 		areaId:1,
+	// 		type:dropDownType
+	// 	  }
+//     	  if(dropDownType==2){
+// 		  delete body.referrer
+// 	  }
+	
+//     axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
+// 						setSpinner(false)
+// 						console.log(response.status==200)
+// 						alert("user created succesfully !!!!!!")
+// 						props.history.push('/');
+// 					  }).catch(error => {
+				
+// 						alert("user not created please contact admin!!!!!!")
+// 						props.location.reload();
+// 					});
+//     // setError(false); 
+// 	// await displayRazorpay();
+// 	//   console.log(verifyPay,"vpayyyy")
 
-	// 	}
+// 	//   if(verifyPay=='success'){
+
+// 	// 	}
 
      
 
-	}
+// 	}
 };
 
 const selectType = (e) =>{
   setDropDownType(e.target.value)
-  console.log(e.target.value,"eeeedrcrrdcre")
   }
 
 // Showing success message
@@ -123,94 +170,16 @@ const errorMessage = () => {
 		<h1>Please enter all the fields</h1>
 	</div>
 	);
-};
+};	
+const openHippopay = () =>{
+	return( <IppoPay pass={true} orderId={orderIds}/>)
 
-function loadScript(src) {
-    return new Promise((resolve) => {
-      const script = document.createElement('script')
-      script.src = src
-      script.onload = () => {
-        resolve(true)
-      }
-      script.onerror = () => {
-        resolve(false)
-      }
-      document.body.appendChild(script)
-    })
-  }
-
-  async function displayRazorpay() {
-		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
-
-    console.log(res,"ressss")
-
-		if (!res) {
-			alert('Razorpay SDK failed to load. Are you online?')
-			return
-		}
-
-		const data = await fetch('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/razorpay', { method: 'POST' }).then((t) =>
-			t.json()
-		)
-
-		console.log(data)
-
-		const options = {
-			key: 'rzp_test_td5Af2X9GYXNnl',
-			currency: data.currency,
-			amount: data.amount.toString(),
-			order_id: data.id,
-			name: 'Donation',
-			description: 'Thank you for nothing. Please give us some money',
-			// image: 'http://localhost:1337/logo.svg',
-			handler: function (response) {
-				setSpinner(true)
-				let body ={
-					name:name,
-					mobile:email,
-					address:address,
-					referrer:refferal,
-					areaId:1,
-					type:dropDownType
-				  }
-			     if(response){
-					axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
-						setSpinner(false)
-						console.log(response.status==200)
-						alert("user created succesfully !!!!!!")
-						props.history.push('/');
-					  }).catch(error => {
-				
-						alert("user not created please contact admin!!!!!!")
-						props.location.reload();
-					});
-
-				 }
-
-				// alert(response.razorpay_payment_id)
-				// alert(response.razorpay_order_id)
-				// alert(response.razorpay_signature)
-				return 'success'
-				
-			},
-			prefill: {
-        name,
-				email: 'bala12@mailnesia.com',
-				phone_number: '7904306518'
-			}
-		}
-		const paymentObject = new window.Razorpay(options)
-		paymentObject.open()
-	}
-
-
-  
-
+}
 
 return ( 
 <div>
 {enableSpinner && <Loader center content="loading" />}
-
+{openUrl && openHippopay()}
 <div className="form">
 	<div>
 		<h1>User Registration</h1>
