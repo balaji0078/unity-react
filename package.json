@@ -29,7 +29,7 @@
     "css-loader": "0.28.4",
     "validator": "^9.0.0",
     "react-ippopay": "^1.0.4",
-    "ramda": "^0.28.0",
+    "ramda": "^0.28.0"
   },
   "scripts": {
     "start": "react-scripts start",
