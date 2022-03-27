@@ -17,8 +17,8 @@ export default class App extends Component {
    // alert(JSON.stringify(e.data.status))
     if(e.data.status == 'success'){
       //  let {setOpenUrl} = this.props
-      data.transaction_id = e.data.transaction_no
-      data.order_id = e.data.order_id 
+      // data.transaction_id = e.data.transaction_no
+      // data.order_id = e.data.order_id 
 
       console.log(data,"dattaatatat")
 
