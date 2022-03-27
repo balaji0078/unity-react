@@ -14,6 +14,7 @@ import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
 import PayForm from './Payform'
 import ShopTable from './shopTable'
+import Ippopay from './IppoPay'
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -450,7 +451,7 @@ const contactUS = () =>{
           </div>
           <div className="content">
             <Switch>
-              {/* <Route exact path="/" component={Model} />  */}
+              <Route exact path="/ippopay" component={Ippopay} /> 
               <Route exact path="/login" component={Login} />
               <Route exact path="/create" component={Create} />
               <Route exact path="/user" component={Tree} />

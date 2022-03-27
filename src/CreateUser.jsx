@@ -22,7 +22,7 @@ const [address, setAddress] = useState('');
 const [enableSpinner, setSpinner] = useState(false);
 const [openUrl,setOpenUrl]= useState(false);
 const [orderIds, setorderIds] = useState('');
-
+const [userBody, setUserBody] = useState({});
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
@@ -59,10 +59,11 @@ const handleRefferal = (e) => {
 // Handling the form submission
 const handleSubmit = async(e) => {
 	e.preventDefault();
-	let amount = 118.00
-	if (name === '' || email === '',refferal ==='') {
+	let amount = 10.00
+	if (name === '' || email === '',address ==='') {
 	   setError(true);
 	}
+	else{
  
 	const headers = {
 		'Content-Type': 'application/json'
@@ -74,13 +75,14 @@ const handleSubmit = async(e) => {
     }
 
 		let body ={
-		name:name,
-		mobile:email,
-		address:address,
-		referrer:refferal,
-		areaId:1,
-		type:dropDownType
+		"name":name,
+		"mobile":email,
+		"address":address,
+		"referrer":refferal,
+		"areaId":1,
+		"type":1
 	  }
+	  setUserBody(body)
 
 	    await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/createOrderID',ippPayBody,{headers:headers}).then(response => {
 						setSpinner(false)
@@ -102,44 +104,9 @@ const handleSubmit = async(e) => {
 						props.location.reload();
 					});
 
-// 	if (name === '' || email === '') {
-// 	setError(true);
-// 	} 
-//   else
-//    {
-	// 	let body ={
-	// 		name:name,
-	// 		mobile:email,
-	// 		address:address,
-	// 		referrer:refferal,
-	// 		areaId:1,
-	// 		type:dropDownType
-	// 	  }
-//     	  if(dropDownType==2){
-// 		  delete body.referrer
-// 	  }
-	
-//     axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/create', body).then(response => {
-// 						setSpinner(false)
-// 						console.log(response.status==200)
-// 						alert("user created succesfully !!!!!!")
-// 						props.history.push('/');
-// 					  }).catch(error => {
-				
-// 						alert("user not created please contact admin!!!!!!")
-// 						props.location.reload();
-// 					});
-//     // setError(false); 
-// 	// await displayRazorpay();
-// 	//   console.log(verifyPay,"vpayyyy")
+		}
 
-// 	//   if(verifyPay=='success'){
 
-// 	// 	}
-
-     
-
-// 	}
 };
 
 const selectType = (e) =>{
@@ -172,7 +139,8 @@ const errorMessage = () => {
 	);
 };	
 const openHippopay = () =>{
-	return( <IppoPay pass={true} orderId={orderIds}/>)
+	console.log(userBody,"userBodyuserBodyuserBody")
+	return( <IppoPay pass={true} orderId={orderIds} userBody={userBody} setOpenUrl={setOpenUrl} props={props}/>)
 
 }
 
@@ -207,13 +175,6 @@ return (
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>referrer</label>
 		<input onChange={handleRefferal} style={{marginLeft:'12px'}} className="form-control"
 		value={refferal} type="text" />
-    </div>
-  <div className='row col-2'>
-	  <label className="label fs-6" style={{paddingLeft:'12px'}}>Select Type</label>
-    <Select defaultValue="1" rows={15} onClick={(e)=>selectType(e)}>
-        <option value={"1"}>User</option>
-        <option value={"2"}>Store</option>
-    </Select>
     </div>
     <div className='row col-2'>
     <label className="label" style={{paddingLeft:'12px'}}>Address</label>
