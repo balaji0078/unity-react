@@ -59,9 +59,10 @@ const handleRefferal = (e) => {
 // Handling the form submission
 const handleSubmit = async(e) => {
 	e.preventDefault();
-	let amount = 10.00
-	if (name === '' || email === '',address ==='') {
+	let amount = 118.00
+	if (name === '' || email === '',address ==='',refferal ==='') {
 	   setError(true);
+	   return
 	}
 	else{
  

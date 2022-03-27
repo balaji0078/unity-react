@@ -74,7 +74,7 @@ const handleSubmit = async(e) => {
 	let body ={
 		coupon:Coupon,
 		product:product,
-		type:dropDownType,
+		type:2,
 		amount:amount,
 		pin:pin
 	  }
@@ -183,17 +183,6 @@ return (
 		<input onChange={handleName} style={{marginLeft:'12px'}}  className="form-control"
 		value={Coupon} type="text"  />
     </div>
-	<div className='row col-2 mt-4' style={{width:'fit-content'}}>
-	  {/* <label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon Type</label> */}
-	<Form.Group controlId="radioList" onChange={(e)=>selectType(e)}>
-    <RadioGroup name="radioList" inline appearance="picker" defaultValue="1">
-      <span style={styles.radioGroupLabel}>Coupon Type: </span>
-      <Radio value="1">CashBack</Radio>
-      <Radio value="2">Products</Radio>
-    </RadioGroup>
-  </Form.Group>
-  </div>
-
     {/* <div className='row col-2' style={{width:'fit-content'}}>
 	  <label className="label fs-6" style={{paddingLeft:'12px'}}>Coupon Type</label>
 	  <Form.Group controlId="radioList">
