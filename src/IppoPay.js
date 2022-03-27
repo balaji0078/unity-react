@@ -15,11 +15,13 @@ export default class App extends Component {
   ippopayHandler = async e => {
 
    // alert(JSON.stringify(e.data.status))
-    console.log(this.props,"trusttt")
     if(e.data.status == 'success'){
       //  let {setOpenUrl} = this.props
-      console.log("success0i0i0i0",data)
-      console.log(data,"user~~~~~~~~~~~~~~")
+      data.transaction_id = e.data.transaction_no
+      data.order_id = e.data.order_id 
+
+      console.log(data,"dattaatatat")
+
       if(!isEmpty(data)){
         let {setOpenUrl} = this.props
 
