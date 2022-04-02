@@ -56,6 +56,20 @@ const handleRefferal = (e) => {
 	setSubmitted(false);
 };
 
+const checkUserValidation = async(data,headers)=>{
+
+
+	await axios.get('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userValidation',data,{headers:headers}).then(response => {
+		console.log(response.status==200,"order id created")
+		if(response.code==200){
+           return true  
+		}
+	  }).catch(error => {
+		alert(JSON.stringify(error.response.data.status))
+	});
+
+}
+
 // Handling the form submission
 const handleSubmit = async(e) => {
 	e.preventDefault();
@@ -83,8 +97,15 @@ const handleSubmit = async(e) => {
 		"areaId":1,
 		"type":1
 	  }
-	  setUserBody(body)
+	  let uservalidationBody = {
+		"mobile":email,
+		"referral_code":refferal,
+	  }
 
+	  let ValidationUser = await checkUserValidation(uservalidationBody,headers)
+	  console.log(ValidationUser,"ValidationUserValidationUser")
+	  if(ValidationUser == true){
+	    setUserBody(body)
 	    await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/createOrderID',ippPayBody,{headers:headers}).then(response => {
 						setSpinner(false)
 						console.log(response.status==200,"order id created")
@@ -103,11 +124,9 @@ const handleSubmit = async(e) => {
 				
 						alert("user and order id is not created please contact admin!!!!!!")
 						props.location.reload();
-					});
-
+			});
 		}
-
-
+	}
 };
 
 const selectType = (e) =>{
