@@ -59,14 +59,13 @@ const handleRefferal = (e) => {
 const checkUserValidation = async(data,headers)=>{
 
 
-	await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userValidation',data,{headers:headers}).then(response => {
-		console.log(response.status==200,"order id created")
-		if(response.code==200){
-           return true  
-		}
+	let res = await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userValidation',data,{headers:headers}).then(response => {
+		return response.data
 	  }).catch(error => {
 		alert(JSON.stringify(error.response.data.status))
 	});
+
+	return res
 
 }
 
@@ -104,7 +103,7 @@ const handleSubmit = async(e) => {
 
 	  let ValidationUser = await checkUserValidation(uservalidationBody,headers)
 	  console.log(ValidationUser,"ValidationUserValidationUser")
-	  if(ValidationUser == true){
+	  if(ValidationUser.code == 200){
 	    setUserBody(body)
 	    await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/createOrderID',ippPayBody,{headers:headers}).then(response => {
 						setSpinner(false)
