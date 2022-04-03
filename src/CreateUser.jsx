@@ -59,7 +59,7 @@ const handleRefferal = (e) => {
 const checkUserValidation = async(data,headers)=>{
 
 
-	await axios.get('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userValidation',data,{headers:headers}).then(response => {
+	await axios.post('https://7c77zipbl1.execute-api.us-east-1.amazonaws.com/prod/userValidation',data,{headers:headers}).then(response => {
 		console.log(response.status==200,"order id created")
 		if(response.code==200){
            return true  
@@ -189,7 +189,7 @@ return (
     <div className='row col-2'>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>Mobile</label>
 		<input onChange={handleEmail} style={{marginLeft:'12px'}} className="form-control"
-		value={email} type="email" />
+		value={email} type="text" />
     </div>
     <div className='row col-2'>
 		<label className="label fs-6" style={{paddingLeft:'12px'}}>referrer</label>
